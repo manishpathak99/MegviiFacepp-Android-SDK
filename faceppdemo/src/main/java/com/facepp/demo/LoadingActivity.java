@@ -20,7 +20,7 @@ import com.facepp.demo.util.SharedUtil;
 import com.facepp.demo.util.Util;
 
 import com.megvii.facepp.sdk.Facepp;
-import com.megvii.licensemanager.sdk.LicenseManager;
+//import com.megvii.licensemanager.sdk.LicenseManager;
 
 import java.util.Locale;
 
@@ -77,48 +77,48 @@ public class LoadingActivity extends Activity {
 
     private void network() {
         int type = Facepp.getSDKAuthType(ConUtil.getFileContent(this, R.raw.megviifacepp_0_5_2_model));
-		if ( type == 2) {// 非联网授权
+//		if ( type == 2) {// 非联网授权
 			authState(true,0,"");
 			return;
-		}
+//		}
 
-		againWarrantyBtn.setVisibility(View.GONE);
-		WarrantyText.setText(getResources().getString(R.string.auth_progress));
-		WarrantyBar.setVisibility(View.VISIBLE);
-		final LicenseManager licenseManager = new LicenseManager(this);
-
-//        licenseManager.setExpirationMillis(Facepp.getApiExpirationMillis(this, ConUtil.getFileContent(this, R.raw
-//				.megviifacepp_0_5_2_model)));
-
-		String uuid = ConUtil.getUUIDString(LoadingActivity.this);
-		long apiName = Facepp.getApiName();
-
-		licenseManager.setAuthTimeBufferMillis(0);
-
-		licenseManager.takeLicenseFromNetwork(Util.CN_LICENSE_URL,uuid, Util.API_KEY, Util.API_SECRET, apiName,
-				LicenseManager.DURATION_30DAYS, "Landmark", "1", new LicenseManager.TakeLicenseCallback() {
-					@Override
-					public void onSuccess() {
-						authState(true,0,"");
-					}
-
-					@Override
-					public void onFailed(int i, byte[] bytes) {
-                        if (TextUtils.isEmpty(Util.API_KEY)||TextUtils.isEmpty(Util.API_SECRET)) {
-                            if (!ConUtil.isReadKey(LoadingActivity.this)) {
-                                authState(false,1001,"");
-                            }else{
-                                authState(false,1001,"");
-                            }
-                        }else{
-                            String msg="";
-                            if (bytes!=null&&bytes.length>0){
-                                msg=  new String(bytes);
-                            }
-                            authState(false,i,msg);
-                        }
-					}
-				});
+//		againWarrantyBtn.setVisibility(View.GONE);
+//		WarrantyText.setText(getResources().getString(R.string.auth_progress));
+//		WarrantyBar.setVisibility(View.VISIBLE);
+//		final LicenseManager licenseManager = new LicenseManager(this);
+//
+////        licenseManager.setExpirationMillis(Facepp.getApiExpirationMillis(this, ConUtil.getFileContent(this, R.raw
+////				.megviifacepp_0_5_2_model)));
+//
+//		String uuid = ConUtil.getUUIDString(LoadingActivity.this);
+//		long apiName = Facepp.getApiName();
+//
+//		licenseManager.setAuthTimeBufferMillis(0);
+//
+//		licenseManager.takeLicenseFromNetwork(Util.CN_LICENSE_URL,uuid, Util.API_KEY, Util.API_SECRET, apiName,
+//				LicenseManager.DURATION_30DAYS, "Landmark", "1", new LicenseManager.TakeLicenseCallback() {
+//					@Override
+//					public void onSuccess() {
+//						authState(true,0,"");
+//					}
+//
+//					@Override
+//					public void onFailed(int i, byte[] bytes) {
+//                        if (TextUtils.isEmpty(Util.API_KEY)||TextUtils.isEmpty(Util.API_SECRET)) {
+//                            if (!ConUtil.isReadKey(LoadingActivity.this)) {
+//                                authState(false,1001,"");
+//                            }else{
+//                                authState(false,1001,"");
+//                            }
+//                        }else{
+//                            String msg="";
+//                            if (bytes!=null&&bytes.length>0){
+//                                msg=  new String(bytes);
+//                            }
+//                            authState(false,i,msg);
+//                        }
+//					}
+//				});
     }
 
     private void freshView(){
